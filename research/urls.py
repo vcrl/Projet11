@@ -15,10 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include("frontpage.urls")),
-    path('', include("accounts.urls")),
-    path('', include("research.urls")),
+    path('substitutes/', views.display_substitutes, name="substitutes"),
 ]
