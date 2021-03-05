@@ -9,10 +9,11 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=155, unique=True)
+    brand = models.CharField(max_length=155, default="")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     nutriscore = models.CharField(max_length=255, default="")
     url = models.CharField(max_length=255, default="")
-    image_url = models.CharField(max_length=255, default="")
+    img_url = models.CharField(max_length=255, default="")
 
     def __str__(self):
         return self.name

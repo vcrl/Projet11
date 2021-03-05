@@ -7,7 +7,7 @@
         <div class="row h-100 align-items-center justify-content-center text-center">
             {% if user.is_authenticated %}
                 <div class="col-lg-10 align-self-end">
-                    <h1 class="text-uppercase text-white font-weight-bold">Produits enregistrés de {{ user.username }}</h1>
+                    <h1 class="text-uppercase text-white font-weight-bold">Produits enregistrés par {{ user.username }}</h1>
                     <hr class="divider my-4" />
                 </div>
                 {% for substitute in substitutes %}
@@ -15,7 +15,7 @@
                     <div class="card-body">
                       <h5 class="card-title">{{ substitute.product.name }}</h5>
                       <p class="card-text">Nutriscore: {{ substitute.product.nutriscore }}</p>
-                      <a href="#" class="btn btn-primary">Page du produit</a>
+                      <a href="{{ substitute.product.url }}" target="_blank" class="btn btn-primary">Page du produit</a>
                     </div>
                   </div>
                 {% endfor %}
