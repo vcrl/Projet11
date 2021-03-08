@@ -11,7 +11,7 @@ class Command(BaseCommand):
     
     def handle(self, *args, **kwargs):
 
-        CATEGORIES = [
+        self.categories = [
             "Boissons",
             "Snacks",
             "Epicerie",
@@ -19,54 +19,40 @@ class Command(BaseCommand):
             "Desserts"
         ]
 
-        NUTRISCORE = [
-            'a',
-            'b',
-            'c'
-        ]
-
-        PRODUCTS_NB = 150
-
-        for nutriscore in NUTRISCORE:
-            for page in range(1, 3):
-                for category in CATEGORIES:
-                    products = self.get_products(category, nutriscore, page)
-                    self.insert_products_in_db(products)
-            
-        print("ok")
+        self.insert_category_in_db()
+        categories = Category.objects.all()
+        for category in categories:
+            products = self.get_products(category.name)
+            self.insert_products_in_db(products, category)
         
-    def insert_products_in_db(self, products):
+    def insert_products_in_db(self, products, category):
         for product in products:
             try:
                 if product['name']:
-                    print("name ok")
-                    add = Product.objects.create( # ICI ça marche pas todo: ca marche pas
+                    add = Product( # ICI ça marche pas todo: ca marche pas
                         name = product['name'],
-                        brands = product['brand'],
-                        category = product['category'],
-                        url = product['url'], img_url = product['img_url'],
+                        brand = product['brand'],
+                        category = category,
+                        url = product['url'],
+                        img_url = product['img_url'],
                         nutriscore = product['nutriscore'],
                         )
-                    print(add)
                     add.save()
-                    print('added')
-                    
+
             except IntegrityError:
                 continue
 
             except KeyError:
                 pass
-
-            except:
-                pass
     
-    def insert_category_in_db(self, category):
-        add = Category.objects.update_or_create(
-            name = category
-        )
-        add.save()
+    def insert_category_in_db(self):
+        for category in self.categories:
+            add = Category(
+                name = category
+            )
+            add.save()
 
-    def get_products(self, category, nutriscore, products_nb):
+    def get_products(self, category):
 
         payload = {
                 'action': 'process',
@@ -75,7 +61,7 @@ class Command(BaseCommand):
                 'tag_0': category,
                 'tagtype_1': 'nutrition_grade',
                 'tag_contains_1': 'contains',
-                'page_size': products_nb,
+                'page_size': 100,
                 'json': '1',
                 }
 
@@ -85,7 +71,7 @@ class Command(BaseCommand):
         for product in response_as_json['products']:
             
             try:
-                values = {
+                product_values = {
                     "name": product['product_name'],
                     "brand": product['brands'],
                     "category": category,
@@ -93,13 +79,8 @@ class Command(BaseCommand):
                     "img_url": product['image_url'],
                     "nutriscore": product['nutrition_grades'],
                 }
-                product_to_add.append(values)
-                #print(product_to_add)
+                product_to_add.append(product_values)
             except KeyError:
                 pass
-
-            except requests.exceptions.ConnectionError:
-                print("Lancement impossible : vérifiez votre connexion internet.")
-                break
             
         return product_to_add

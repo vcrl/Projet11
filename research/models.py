@@ -8,12 +8,12 @@ class Category(models.Model):
         return self.name
 
 class Product(models.Model):
-    name = models.CharField(max_length=155, unique=True)
-    brand = models.CharField(max_length=155, default="")
+    name = models.CharField(max_length=155, unique=True, null=True)
+    brand = models.CharField(max_length=155, default="", null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    nutriscore = models.CharField(max_length=255, default="")
-    url = models.CharField(max_length=255, default="")
-    img_url = models.CharField(max_length=255, default="")
+    nutriscore = models.CharField(max_length=255, default="", null=True)
+    url = models.CharField(max_length=255, default="", null=True)
+    img_url = models.CharField(max_length=255, default="", null=True)
 
     def __str__(self):
         return self.name
