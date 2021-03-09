@@ -30,19 +30,12 @@
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
                         <!--<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Services</a></li>-->
-                        <form method="POST">
-                            <div class="form-group">
-                                {% csrf_token %}
-                                <li class="nav-item"><input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: biscuits..."></li>
-                                <li class="nav-item"><button type="submit" class="btn btn-primary js-scroll-trigger">Rechercher</button></li>
-                            </div>
-                        </form>
                         {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'profile' %}">Profil</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'substitutes' %}">Aliments</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'profile' %}"><img src="{% static "/img/nav/user.png" %}" width="25" height="25"></a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'substitutes' %}"><img src="{% static "/img/nav/carrot.png" %}" width="30" height="35"></a></li>
                         <form action="/signout/" method="POST">
                             {% csrf_token %}
-                            <button class="nav-link js-scroll-trigger" type="submit">Logout</button>
+                            <button class="nav-link js-scroll-trigger" type="submit" style="border:none;background:none;"><img src="{% static "/img/nav/logout.png" %}" width="25" height="25"></button>
                         </form>
                         {% else %}
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'signup' %}">Inscription</a></li>

@@ -19,4 +19,8 @@ from . import views
 
 urlpatterns = [
     path('substitutes/', views.display_substitutes, name="substitutes"),
+    path('products/', views.display_products, name="products"),
+    path('products/<int:product_pk>', views.product_details, name="product_details"),
+    path('products/<int:product_pk>/save', views.save_product, name="save"),
+    path('products/<int:substitute_pk>/delete', views.delete_product, name="delete"),
 ]

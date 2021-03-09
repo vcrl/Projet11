@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "frontpage",
     "accounts",
-    "research"
+    "research",
+    "django_filters"
 ]
 
 MIDDLEWARE = [

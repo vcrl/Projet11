@@ -60,7 +60,7 @@ class Command(BaseCommand):
         for product in products:
             try:
                 if product['name']:
-                    add = Product( # ICI ça marche pas todo: ca marche pas
+                    add = Product(
                         name = product['name'],
                         brand = product['brand'],
                         category = category,

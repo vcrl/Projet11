@@ -1,0 +1,74 @@
+{% extends 'frontpage/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            {% if user.is_authenticated %}
+                <div class="col-lg-10">
+                    <h1 class="text-uppercase text-white font-weight-bold">Aliments disponibles</h1>
+                    <hr class="divider my-4" />
+                </div>
+                {% for product in page.object_list %}
+                <div class="card mb-3" style="max-width: 540px;margin-right: 1%;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        {% if product.nutriscore == "a" %}
+                        <img src="{% static '/img/products/nutriscore/a.png' %}" alt="nutriscore A">
+                        {% elif product.nutriscore == "b" %}
+                        <img src="{% static '/img/products/nutriscore/b.png' %}" alt="nutriscore B">
+                        {% elif product.nutriscore == "c" %}
+                        <img src="{% static '/img/products/nutriscore/c.png' %}" alt="nutriscore C">
+                        {% elif product.nutriscore == "d" %}
+                        <img src="{% static '/img/products/nutriscore/d.png' %}" alt="nutriscore D">
+                        {% elif product.nutriscore == "e" %}
+                        <img src="{% static '/img/products/nutriscore/e.png' %}" alt="nutriscore E">
+                        {% else %}
+                        <p>Erreur</p>
+                        {% endif %}
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ product.name }}</h5>
+                          <h5 class="card-title" style="font-size: medium;"><i>{{ product.brand }}</i></h5>
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a class="btn btn-primary me-md-2" href="{% url 'product_details' product.id %}" style="margin-right: 1%;">En savoir plus</a>
+                            <form method="POST" action="{% url 'save' product.id %}">
+                                {% csrf_token %}
+                                <button id="save_btn" class="btn btn-primary" type="submit">Sauvegarder</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        {% if page.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'products' %}?page={{ page.previous_page_number }}" tabindex="-1" aria-disabled="false">Previous</a>
+                        </li>
+                        {% endif %}
+                        {% if page.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'products' %}?page={{ page.next_page_number }}">Next</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% else %}
+                <div class="col-lg-10 align-self-end">
+                    <h1 class="text-uppercase text-white font-weight-bold">Vous n'êtes pas connecté.</h1>
+                    <hr class="divider my-4" />
+                </div>
+                <div class="col-lg-8 align-self-baseline">
+                    <p class="text-white-75 font-weight-light mb-5">Connectez-vous ou créez un compte pour accéder à cette page !</p>
+                </div>
+            {%  endif %}
+        </div>
+    </div>
+</header>
+{% endblock %}
