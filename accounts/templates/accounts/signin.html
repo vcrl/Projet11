@@ -3,6 +3,16 @@
 {% block content %}
 
 <header class="masthead">
+    {% if user.is_authenticated %}
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-10 align-self-begin">
+                <h1 class="text-uppercase text-white font-weight-bold">Page indisponible... Avez-vous bien cherché ?</h1>
+                <hr class="divider my-4" />
+            </div>
+        </div>
+    </div>
+    {% else %}
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-content-center text-center">
             <div class="col-lg-10 align-self-end">
@@ -16,14 +26,15 @@
                     {{ error }}
                 </div>
                 {%  endif %}
-                <form method="POST">
+                <form method="POST" style="color:white;">
                     {% csrf_token %}
-                    {{form.as_p}}
+                    {{ form.as_p }}
                 <button type="submit" class="btn btn-primary btn-xl js-scroll-trigger">Connexion</button>
                 </form>
             </div>
         </div>
     </div>
+    {% endif %}
 </header>
 
 {% endblock %}

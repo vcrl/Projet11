@@ -8,9 +8,22 @@
         <div class="row h-100 align-items-center justify-content-center text-center">
             {% if user.is_authenticated %}
                 <div class="col-lg-10">
-                    <h1 class="text-uppercase text-white font-weight-bold">Aliments disponibles</h1>
-                    <hr class="divider my-4" />
+                    <h2 class="text-uppercase text-white text-left font-weight-bold">Aliments disponibles</h2>
                 </div>
+                <nav>
+                    <ul class="pagination justify-content-end">
+                        {% if page.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page.previous_page_number }}" tabindex="-1" aria-disabled="false">Page précédente</a>
+                        </li>
+                        {% endif %}
+                        {% if page.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page.next_page_number }}">Page suivante</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
                 {% for product in page.object_list %}
                 <div class="card mb-3" style="max-width: 540px;margin-right: 1%;">
                     <div class="row g-0">
@@ -45,20 +58,6 @@
                     </div>
                   </div>
                 {% endfor %}
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end">
-                        {% if page.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" href="{% url 'products' %}?page={{ page.previous_page_number }}" tabindex="-1" aria-disabled="false">Previous</a>
-                        </li>
-                        {% endif %}
-                        {% if page.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" href="{% url 'products' %}?page={{ page.next_page_number }}">Next</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </nav>
             {% else %}
                 <div class="col-lg-10 align-self-end">
                     <h1 class="text-uppercase text-white font-weight-bold">Vous n'êtes pas connecté.</h1>

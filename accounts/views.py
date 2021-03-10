@@ -3,11 +3,12 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from .forms import SignUpForm, LoginForm
 
 
 def signup(request):
     if request.method == "GET":
-        return render(request, "accounts/signup.html", {'form':UserCreationForm()})
+        return render(request, "accounts/signup.html", {'form':SignUpForm()})
     else:
         if request.POST["password1"] == request.POST["password2"]:
             try:
@@ -16,17 +17,17 @@ def signup(request):
                 login(request, newuser)
                 return redirect("frontpage")
             except IntegrityError:
-                return render(request, "accounts/signup.html", {'form':UserCreationForm(), 'error':'Ce pseudo est déjà utilisé.'})
+                return render(request, "accounts/signup.html", {'form':SignUpForm(), 'error':'Ce pseudo est déjà utilisé.'})
         else:
-            return render(request, "accounts/signup.html", {'form':UserCreationForm(), 'error':'Les mots de passe ne correspondent pas.'})
+            return render(request, "accounts/signup.html", {'form':SignUpForm(), 'error':'Les mots de passe ne correspondent pas.'})
 
 def loginuser(request):
     if request.method == "GET":
-        return render(request, "accounts/signin.html", {'form':AuthenticationForm()})
+        return render(request, "accounts/signin.html", {'form':LoginForm()})
     else:
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
-            return render(request, "accounts/signin.html", {'form':AuthenticationForm(), 'error':'Le pseudo et le mot de passe ne correspondent pas.'})
+            return render(request, "accounts/signin.html", {'form':LoginForm(), 'error':'Le pseudo et le mot de passe ne correspondent pas.'})
         else:
             login(request, user)
             return redirect("frontpage")
