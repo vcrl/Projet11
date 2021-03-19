@@ -5,3 +5,6 @@ selenium
 django-selenium
 coverage
 gunicorn
+django-filter
+djangorestframework-filters
+djangorestframework
