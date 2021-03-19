@@ -13,7 +13,7 @@ class Test_Views(TestCase):
         response = self.client.get(reverse('signup'))
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'accounts/signup.html')
-    
+
     def test_signup_post(self):
         response = self.client.post(reverse('signup'), {
             'username': 'pseudo',
@@ -24,12 +24,12 @@ class Test_Views(TestCase):
 
         self.assertEquals(response.status_code, 302)
         self.assertEquals(User.objects.count(), 1)
-    
+
     def test_loginuser_get(self):
         response = self.client.get(reverse('loginuser'))
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'accounts/signin.html')
-    
+
     def test_loginuser_post(self):
         self.credentials = {
             'username': 'user',

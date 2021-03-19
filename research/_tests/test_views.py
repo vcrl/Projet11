@@ -1,9 +1,11 @@
 from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse, resolve
+from django.core.paginator import Page
 from django.contrib.auth.models import User
 from django.contrib import auth
 from ..models import Product, Substitute, Category
 from ..views import display_products, display_substitutes, product_details, save_product, delete_product
+from ..manager import manager_display_products
 import json
 
 class Test_Views(TestCase):
@@ -18,6 +20,13 @@ class Test_Views(TestCase):
     def test_products(self):
         response = self.client.get(reverse(display_products))
         self.assertEqual(response.status_code, 302)
+    
+    def test_manager_products(self):
+        search = "coca"
+        page_number = 1
+        datas = manager_display_products(search, page_number)
+        self.assertEqual(type(datas["page"]), Page)
+        self.assertEqual(datas["page"].number, 1)
     
     def test_product_details(self):
         self.client.login(username="user", password="123")

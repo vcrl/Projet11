@@ -32,8 +32,8 @@
                         <form  action="{% url 'products' %}" method="GET">
                             {% csrf_token %}
                             <div class="searchbar form-group">
-                              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="search" placeholder="Ex: Nutella...">
-                              <button type="submit" class="btn btn-primary js-scroll-trigger">Rechercher</button>
+                              <input type="text" id="searchinput" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="search" placeholder="Ex: Nutella...">
+                              <button type="submit" id="searchsubmit" class="btn btn-primary js-scroll-trigger">Rechercher</button>
                             </div>
                         </form>
                         {% if user.is_authenticated %}
@@ -44,8 +44,8 @@
                             <button class="nav-link js-scroll-trigger" type="submit" style="border:none;background:none;"><img src="{% static "/img/nav/logout.svg" %}" width="32" height="32"></button>
                         </form>
                         {% else %}
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'signup' %}">Inscription</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'loginuser' %}">Connexion</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" id="logintab" href="{% url 'signup' %}">Inscription</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" id = "signuptab" href="{% url 'loginuser' %}">Connexion</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -58,7 +58,7 @@
         </div>
         <!-- Footer-->
         <footer class="bg-light py-5" style="display: flex;justify-content: center;">
-            <div class="footer-link"><div class="small text-center text-muted">Mention légale</div></div>
+            <div class="footer-link"><div class="small text-center text-muted"><a href="{% url 'mentions' %}" style="color:black">Mention légale</a></div></div>
             <div class="footer-link"><div class="small text-center text-muted">Contact</div></div>
         </footer>
         <!-- Bootstrap core JS-->

@@ -1,0 +1,83 @@
+{% extends 'frontpage/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            {% if user.is_authenticated %}
+                <div class="col-lg-10">
+                    <h2 class="text-uppercase text-left text-white font-weight-bold">Voici vos produits enregistrés</h2>
+                </div>
+                <nav>
+                    <ul class="pagination justify-content-end">
+                        {% if page.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'substitutes' %}?page={{ page.previous_page_number }}">Page précédente</a>
+                        </li>
+                        {% endif %}
+                        {% if page.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'substitutes' %}?page={{ page.next_page_number }}">Page suivante</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% for substitute in page.object_list %}
+                    {% if substitute %}
+                    <div class="card mb-3" style="max-width: 540px;margin-right: 1%;">
+                        <div class="row g-0">
+                        <div class="col-md-4">
+                            {% if substitute.product.nutriscore == "a" %}
+                            <img src="{% static '/img/products/nutriscore/a.png' %}" alt="nutriscore A">
+                            {% elif substitute.product.nutriscore == "b" %}
+                            <img src="{% static '/img/products/nutriscore/b.png' %}" alt="nutriscore B">
+                            {% elif substitute.product.nutriscore == "c" %}
+                            <img src="{% static '/img/products/nutriscore/c.png' %}" alt="nutriscore C">
+                            {% elif substitute.product.nutriscore == "d" %}
+                            <img src="{% static '/img/products/nutriscore/d.png' %}" alt="nutriscore D">
+                            {% elif substitute.product.nutriscore == "e" %}
+                            <img src="{% static '/img/products/nutriscore/e.png' %}" alt="nutriscore E">
+                            {% else %}
+                            <p>Erreur</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                            <h5 class="card-title">{{ substitute.product.name }}</h5>
+                            <h5 class="card-title" style="font-size: medium;"><i>{{ substitute.product.brand }}</i></h5>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a class="btn btn-primary me-md-2" href="{% url 'product_details' substitute.product.id %}" style="margin-right: 1%;">En savoir plus</a>
+                                <form method="POST" action="{% url 'delete' substitute.id %}">
+                                    {% csrf_token %}
+                                    <button id="save_btn" class="btn btn-primary" type="submit">Suppression</button>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="col-lg-10 align-self-end">
+                        <h2 class="text-uppercase text-white font-weight-bold">Vous n'avez encore aucun produits enregistrés !</h2>
+                        <hr class="divider my-4" />
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                
+            {% else %}
+                <div class="col-lg-10 align-self-end">
+                    <h1 class="text-uppercase text-white font-weight-bold">Vous n'êtes pas connecté.</h1>
+                    <hr class="divider my-4" />
+                </div>
+                <div class="col-lg-8 align-self-baseline">
+                    <p class="text-white-75 font-weight-light mb-5">Connectez-vous ou créez un compte pour accéder à cette page !</p>
+                </div>
+            {%  endif %}
+        </div>
+    </div>
+    
+</header>
+
+{% endblock %}

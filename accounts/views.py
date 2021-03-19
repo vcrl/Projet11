@@ -12,7 +12,7 @@ def signup(request):
     else:
         if request.POST["password1"] == request.POST["password2"]:
             try:
-                newuser = User.objects.create_user(request.POST["username"], None, request.POST["password1"])
+                newuser = User.objects.create_user(request.POST["username"], request.POST['email'], request.POST["password1"])
                 User.save(newuser)
                 login(request, newuser)
                 return redirect("frontpage")

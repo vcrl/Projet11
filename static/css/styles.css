@@ -47,6 +47,17 @@
   box-sizing: border-box;
 }
 
+.off_link{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.save-product{
+  background: None;
+  border: 0;
+}
+
 .signup-form{
   display: flex;
   flex-direction: column;

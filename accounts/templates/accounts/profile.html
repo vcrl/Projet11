@@ -13,17 +13,23 @@
             <div class="col-lg-8 align-self-baseline">
                 <p class="text-white-75 font-weight-light mb-5">{{ user.username }}.</p>
             </div>
-            {% else %}
-            <div class="col-lg-10 align-self-end">
-                <h1 class="text-uppercase text-white font-weight-bold">Vous n'êtes pas connecté.</h1>
-                <hr class="divider my-4" />
-            </div>
-            <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 font-weight-light mb-5">Connectez-vous ou créez un compte pour accéder à cette page !</p>
-            </div>
-            {%  endif %}
         </div>
     </div>
 </header>
+
+<section class="page-section" id="services">
+    <div class="container">
+        <h2 class="text-center mt-0">{{ user.email }}</h2>
+    </div>
+</section>
+            {% else %}
+                <div class="col-lg-10 align-self-end">
+                    <h1 class="text-uppercase text-white font-weight-bold">Vous n'êtes pas connecté.</h1>
+                    <hr class="divider my-4" />
+                </div>
+                <div class="col-lg-8 align-self-baseline">
+                    <p class="text-white-75 font-weight-light mb-5">Connectez-vous ou créez un compte pour accéder à cette page !</p>
+                </div>
+            {%  endif %}
 
 {% endblock %}

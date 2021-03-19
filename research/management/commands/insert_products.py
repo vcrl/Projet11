@@ -49,6 +49,9 @@ class Command(BaseCommand):
                     "url": product['url'],
                     "img_url": product['image_url'],
                     "nutriscore": product['nutrition_grades'],
+                    "fat": product['nutriments']['fat_value'],
+                    "kcal": product['nutriments']['energy-kcal'],
+                    "proteins": product['nutriments']['proteins'],
                 }
                 product_to_add.append(product_values)
             except KeyError:
@@ -67,6 +70,9 @@ class Command(BaseCommand):
                         url = product['url'],
                         img_url = product['img_url'],
                         nutriscore = product['nutriscore'],
+                        fat = product["fat"],
+                        kcal = product["kcal"],
+                        proteins = product["proteins"]
                         )
                     add.save()
 

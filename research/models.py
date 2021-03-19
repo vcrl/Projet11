@@ -14,6 +14,9 @@ class Product(models.Model):
     nutriscore = models.CharField(max_length=255, default="", null=True)
     url = models.CharField(max_length=255, default="", null=True)
     img_url = models.CharField(max_length=255, default="", null=True)
+    fat = models.CharField(max_length=155, unique=True, null=True)
+    kcal = models.CharField(max_length=155, unique=True, null=True)
+    proteins = models.CharField(max_length=155, unique=True, null=True)
 
     def __str__(self):
         return self.name
