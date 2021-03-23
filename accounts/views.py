@@ -25,7 +25,7 @@ def loginuser(request):
     if request.method == "GET":
         return render(request, "accounts/signin.html", {'form':LoginForm()})
     else:
-        user = authenticate(request, email=request.POST['email'], password=request.POST['password'])
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
             return render(request, "accounts/signin.html", {'form':LoginForm(), 'error':'Le mail et le mot de passe ne correspondent pas.'})
         else:
