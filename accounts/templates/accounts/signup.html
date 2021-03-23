@@ -30,23 +30,8 @@
                     {% csrf_token %}
                     <div class="signup-form">
                         <div>
-                            {{ form.username.label }}
+                            {{ form.as_p }}
                             {{form.username}}
-                        </div>
-
-                        <div>
-                            {{ form.email.label }}
-                            {{form.email}}
-                        </div>
-
-                        <div>
-                            {{ form.password1.label }}
-                            {{form.password1}}
-                        </div>
-
-                        <div>
-                            {{ form.password2.label }}
-                            {{form.password2}}
                         </div>
                     </div>
                     <br/><br/>
