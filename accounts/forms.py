@@ -19,7 +19,7 @@ class SignUpForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     username = forms.CharField(max_length=254)
     username.label = "Pseudo/Email :"
-    email = forms.EmailField(max_length=254, unique=True)
+    email = forms.EmailField(max_length=254)
     email.label = "Adresse mail :"
     password = forms.CharField(widget=forms.PasswordInput)
     password.label = "Mot de passe :"
