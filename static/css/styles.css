@@ -47,6 +47,42 @@
   box-sizing: border-box;
 }
 
+.nutriscore {
+    position: absolute;
+    right: 10%;
+    top: 10%;
+    color:white;
+}
+
+.indexheader{
+    background-image: url("../img/frontpage/portfolio/fullsize/4.jpg");
+}
+
+.profilename{
+  background-color:rgba(1, 1, 1, 0.6);
+}
+
+header.masthead {
+  padding-top: 10rem;
+  padding-bottom: calc(10rem - 4.5rem);
+  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  background-image: url("../img/frontpage/portfolio/fullsize/4.jpg");
+}
+
+.coletteremy {
+  color: white;
+  background-image: url("../img/frontpage/portfolio/fullsize/5.jpg") !important;
+}
+
+.photosremy{
+  background-color:rgba(1, 1, 1, 0.2);
+  border-radius: 5px;
+}
+
 .off_link{
   display: flex;
   justify-content: center;
@@ -10131,15 +10167,6 @@ hr.light {
   }
 }
 
-header.masthead {
-  padding-top: 10rem;
-  padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-size: cover;
-}
 header.masthead h1 {
   font-size: 2.25rem;
 }

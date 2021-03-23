@@ -34,8 +34,8 @@ def save_product(request, product_pk):
         user = request.user
         substitute = Substitute(product=product, user=user)
         substitute.save()
-        #return redirect("substitutes")
-        return render(request, "research/product.html", {"product":product})
+        return redirect("substitutes")
+        #return render(request, "research/substitutes.html")
     else:
         return redirect("frontpage")
 

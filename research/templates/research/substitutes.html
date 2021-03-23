@@ -16,18 +16,32 @@
 </header>
 <div class="container h-50" style="height: initial; min-height: initial;">
     <div class="row h-100 align-items-center justify-content-center text-center" style="margin: 4em auto">
-        <div class="row">
         {% for substitute in page.object_list %}
-            <div class="col-md-4" style="margin-bottom:1%;align-items: center;">
-                <a href="{% url 'product_details' substitute.product.id %}"><img src="{{ substitute.product.img_url }}" style="width: 250px; height: 250px;"></a>
-                <a href="{% url 'product_details' substitute.product.id %}" style="color:black"><h4>{{ substitute.product.name }}</h4></a>
-                <form method="POST" action="{% url 'delete' substitute.id %}">
+        <div class="col-lg-4 col-md-6">
+            <div class="mt-5">
+                <img src="{{ substitute.product.img_url }}" class="img-fluid" style="height:250px;width: 250px;">
+                {% if product.nutriscore == "a" %}
+                    <span class="badge-pill nutriscore text-uppercase" style="background-color: green;">{{ subtitute.product.nutriscore }}</span>
+                {% elif product.nutriscore == "b" %}
+                    <span class="badge-pill nutriscore text-uppercase" style="background-color: green;">{{ subtitute.product.nutriscore }}</span>
+                {% elif product.nutriscore == "c" %}
+                    <span class="badge-pill nutriscore text-uppercase" style="background-color: yellow;color:black">{{ subtitute.product.nutriscore }}</span>
+                {% elif product.nutriscore == "d" %}
+                    <span class="badge-pill nutriscore text-uppercase" style="background-color: orange;">{{ subtitute.product.nutriscore }}</span>
+                {% elif product.nutriscore == "e" %}
+                    <span class="badge-pill nutriscore text-uppercase" style="background-color: red;">{{ subtitute.product.nutriscore }}</span>
+                {% endif %}
+              <div class="container-textproduct">
+                <h6><strong>{{ substitute.product.name }}</strong></h6>
+                  <a href="{% url 'product_details' substitute.product.id %}">Détails</a>
+                  <form method="POST" action="{% url 'delete' substitute.id %}">
                     {% csrf_token %}
-                    <button id="save_btn" class="btn btn-primary" type="submit"><img src="{% static '/img/products/trash.png' %}" alt="Save" style="width: 32px;height: 32px;margin-right: 1em;">Supprimer</button>
+                    <button id="save_btn" class="btn btn-primary" type="submit"><img src="{% static '/img/products/trash.png' %}" alt="Delete" style="width: 32px;height: 32px;margin-right: 1em;">Supprimer</button>
                 </form>
+                </div>
             </div>
-        {% endfor %}
         </div>
+            {% endfor %}
         
         {% else %}
         <div class="col-lg-10 align-self-end">
