@@ -8,4 +8,5 @@ gunicorn
 django-filter
 djangorestframework-filters
 djangorestframework
+django-heroku
 psycopg2
