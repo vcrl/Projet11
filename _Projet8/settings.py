@@ -26,7 +26,7 @@ SECRET_KEY = '84-d)vu-dnzpeddj2f18#_e!v&5=v$$3012(shh7m9aad0iac)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hidden-bastion-36540.herokuapp.com/']
+ALLOWED_HOSTS = ['infinite-dusk-59365.herokuapp.com']
 
 
 # Application definition
