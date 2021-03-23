@@ -28,7 +28,18 @@
                 {%  endif %}
                 <form method="POST" style="color:white;">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    <div class="signup-form">
+                        <div>
+                            {{ form.email.label }}
+                            {{form.email}}
+                        </div>
+
+                        <div>
+                            {{ form.password.label }}
+                            {{form.password}}
+                        </div>
+                    </div>
+                    <br/><br/>
                 <button type="submit" class="btn btn-primary btn-xl js-scroll-trigger">Connexion</button>
                 </form>
             </div>
