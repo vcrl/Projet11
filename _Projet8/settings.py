@@ -101,7 +101,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'accounts.UserMail'
 AUTHENTICATION_BACKENDS = ['accounts.backends.LoginWithEmail']
 
 # Internationalization
