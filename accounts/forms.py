@@ -19,9 +19,11 @@ class SignUpForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     username = forms.CharField(max_length=254)
     username.label = "Pseudo :"
+    email = forms.CharField(max_length=254)
+    email.label = "Adresse mail :"
     password = forms.CharField(widget=forms.PasswordInput)
     password.label = "Mot de passe :"
 
     class Meta:
         model = User
-        fields = ('username', 'password1')
+        fields = ('email', 'password1')
