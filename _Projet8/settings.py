@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     "frontpage",
     "accounts",
     "research",
-    "django_filters"
 ]
 
 MIDDLEWARE = [
