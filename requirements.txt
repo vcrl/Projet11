@@ -6,8 +6,5 @@ django-selenium
 coverage
 gunicorn
 requests
-django-filter
-djangorestframework-filters
-djangorestframework
 django-heroku
 psycopg2

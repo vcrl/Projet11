@@ -14,7 +14,7 @@
                     <form  action="{% url 'products' %}" method="GET">
                         {% csrf_token %}
                         <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="search" placeholder="Ex: Nutella...">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="search" placeholder="Ex: Nutella..." required>
                         <hr class="divider my-4" />
                         <button type="submit" class="btn btn-primary btn-xl js-scroll-trigger">Rechercher</button>
                         </div>

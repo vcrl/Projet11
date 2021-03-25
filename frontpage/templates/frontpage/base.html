@@ -32,7 +32,7 @@
                         <form  action="{% url 'products' %}" method="GET">
                             {% csrf_token %}
                             <div class="searchbar form-group">
-                              <input type="text" id="searchinput" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="search" placeholder="Ex: Nutella...">
+                              <input type="text" id="searchinput" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="search" placeholder="Ex: Nutella..." required>
                               <button type="submit" id="searchsubmit" class="btn btn-primary js-scroll-trigger">Rechercher</button>
                             </div>
                         </form>

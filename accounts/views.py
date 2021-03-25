@@ -1,3 +1,7 @@
+"""
+Vues correspondant à l'application 'accounts' qui
+gère toutes les requêtes liées à l'authentification
+"""
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
@@ -7,6 +11,10 @@ from .forms import SignUpForm, LoginForm
 
 
 def signup(request):
+    """
+    Fonction servant à traiter les requêtes liées
+    à l'inscription d'un utilisateur sur l'application.
+    """
     if request.method == "GET":
         return render(request, "accounts/signup.html", {'form':SignUpForm()})
     else:
@@ -22,6 +30,10 @@ def signup(request):
             return render(request, "accounts/signup.html", {'form':SignUpForm(), 'error':'Les mots de passe ne correspondent pas.'})
 
 def loginuser(request):
+    """
+    Fonction servant à traiter les requêtes liées
+    à la connexion d'un utilisateur sur l'application.
+    """
     if request.method == "GET":
         return render(request, "accounts/signin.html", {'form':LoginForm()})
     else:
@@ -33,12 +45,25 @@ def loginuser(request):
             return redirect("frontpage")
 
 def return_to_frontpage(request):
+    """
+    Fonction servant à traiter les requêtes liées
+    à l'inscription d'un utilisateur sur l'application.
+    """
     return render(request, "../frontpage/frontpage/index.html")
 
 def signout(request):
+    """
+    Fonction servant à traiter les requêtes liées
+    à la déconnexion d'un utilisateur sur l'application.
+    """
     if request.method == 'POST':
         logout(request)
         return redirect("frontpage")
 
 def displayprofile(request):
+    """
+    Fonction servant à traiter les requêtes liées
+    à l'affichage du profil d'unutilisateur sur 
+    l'application.
+    """
     return render(request, "accounts/profile.html")

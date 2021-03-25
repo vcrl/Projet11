@@ -7,7 +7,8 @@ from django.db import IntegrityError
 from .models import Product, Substitute
 
 def manager_display_products(search, page_number):
-    products = Product.objects.all().filter(name__icontains=search)
+    product = Product.objects.filter(name__icontains=search).first()
+    products = Product.objects.all().filter(name__icontains=search).order_by('nutriscore')
     products_paginator = Paginator(products, 6)
     page = products_paginator.get_page(page_number)
-    return {"count":products_paginator.count, "page":page}
+    return {"count":products_paginator.count, "page":page, "product":product}

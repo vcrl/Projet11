@@ -14,7 +14,9 @@
     <div class="container h-50" style="margin: 4em auto">
         <div class="row h-100 align-items-center justify-content-center text-center">
                 <div class="col-lg-10">
-                  <h2 class="text-uppercase text-white font-weight-bold">Connectez-vous !</h2>
+                  <h1 class="text-uppercase text-white font-weight-bold">Encore vous ?</h1>
+                  <hr class="divider my-4" />
+                  <h4 class="text-uppercase text-white font-weight-bold">Ca nous fait plaisir de vous revoir</h4>
                   <hr class="divider my-4" />
               </div>
         </div>
@@ -25,7 +27,7 @@
         <form method="POST">
             {% csrf_token %}
             <div class="form-group">
-              <label for="exampleInputEmail1">Pseudonyme</label>
+              <label for="exampleInputEmail1">Adresse email</label>
               <br/>
               {{ form.username }}
               <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->

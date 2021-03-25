@@ -3,13 +3,19 @@
 
 {% block content %}
 
-<header class="product_header masthead" style="height: initial; min-height: initial;">
+<header class="product_header masthead" style="height: initial; min-height: initial;background-image: url({{ product.img_url }});background-repeat: repeat-y">
     <div class="container h-50" style="margin: 4em auto">
         <div class="row h-100 align-items-center justify-content-center text-center">
-            {% if user.is_authenticated %}
                 <div class="col-lg-10">
-                  <h2 class="text-uppercase text-white font-weight-bold">Vous pouvez remplacer cet aliment par :</h2>
+                {% if page.object_list %}
+                  <h1 class="text-uppercase text-white font-weight-bold">{{ product.name }}</h1>
                   <hr class="divider my-4" />
+                  <h2 class="text-uppercase text-white font-weight-bold">Vous pouvez remplacer cet aliment par :</h2>
+                {% else %}
+                <h1 class="text-uppercase text-white font-weight-bold" style="color:black !important">Aucun produit n'a été trouvé.</h1>
+                <h2 class="text-uppercase text-white font-weight-bold" style="color:black !important">Avez-vous bien tapé votre requête ?</h2>
+                <a href="{% url 'frontpage' %}">Retour à la page principale</a>
+                {% endif %}
               </div>
         </div>
       </div>
@@ -42,16 +48,6 @@
             </div>
         </div>
             {% endfor %}
-            </div>
-        {% else %}
-            <div class="col-lg-10 align-self-end">
-                <h1 class="text-uppercase text-white font-weight-bold">Vous n'êtes pas connecté.</h1>
-                <hr class="divider my-4" />
-            </div>
-            <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 font-weight-light mb-5">Connectez-vous ou créez un compte pour accéder à cette page !</p>
-            </div>
-        {%  endif %}
     </div>
 </div>
 {% endblock %}
