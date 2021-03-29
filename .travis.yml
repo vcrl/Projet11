@@ -10,7 +10,5 @@ env: DJANGO_SETTINGS_MODULE="_Projet8.settings"
 services:
   - postgresql
 
-script:
-  - manage.py test account frontpage research
 
 
