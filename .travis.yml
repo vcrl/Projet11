@@ -11,6 +11,6 @@ services:
   - postgresql
 
 script:
-  - ./manage.py test
+  - python3 manage.py test account frontpage research
 
 
