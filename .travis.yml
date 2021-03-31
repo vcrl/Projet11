@@ -16,3 +16,5 @@ branches:
 script:
   - python manage.py test
 
+services:
+  - postgresql
