@@ -12,6 +12,11 @@ env: DJANGO_SETTINGS_MODULE="_Projet8.settings"
 services:
   - postgresql
 
+# safelist
+branches:
+  only:
+    - p10
+
 script:
   - python manage.py test
 
