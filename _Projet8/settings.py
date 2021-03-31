@@ -82,11 +82,11 @@ WSGI_APPLICATION = '_Projet8.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'projet8',
-        'USER': 'root',
-        'PASSWORD': '123',
-        'HOST': '51.178.38.243',
-        'PORT': '5432',
+        'NAME': '',
+        'USER': 'postgres',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
