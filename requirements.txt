@@ -1,4 +1,4 @@
-django
+$django
 whitenoise
 pytest
 selenium
@@ -8,3 +8,4 @@ gunicorn
 requests
 django-heroku
 psycopg2
+sentry_sdk
