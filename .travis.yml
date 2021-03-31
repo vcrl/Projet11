@@ -7,7 +7,7 @@ python:
 install:
   - pip install -r requirements.txt
 
-env: DJANGO_SETTINGS_MODULE="_Projet8.travis"
+env: DJANGO_SETTINGS_MODULE="_Projet8.settings"
 
 branches:
   only:
