@@ -7,9 +7,8 @@ python:
 install:
   - pip install -r requirements.txt
 
-env: DJANGO_SETTINGS_MODULE="_Projet8.settings"
+#env: DJANGO_SETTINGS_MODULE="_Projet8.settings"
 
-# safelist
 branches:
   only:
     - p10
