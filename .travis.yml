@@ -1,10 +1,11 @@
 language: python
 python:
   - '3.5'
+  - 3.6
   - '3.8'
   - '3.9'
 
-before_script:
+install:
   - pip install -r requirements.txt
 
 env: DJANGO_SETTINGS_MODULE="_Projet8.settings"
@@ -13,5 +14,5 @@ services:
   - postgresql
 
 script:
-  - python3 manage.py test
+  - python manage.py test
 
