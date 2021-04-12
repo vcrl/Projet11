@@ -7,6 +7,7 @@ class Command(BaseCommand):
     help = "Script d'ajout des produits en base de donnée."
 
     def __init__(self):
+        super(Command, self).__init__()
         self.api_url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process"
     
     def handle(self, *args, **kwargs):
