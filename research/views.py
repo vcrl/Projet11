@@ -9,8 +9,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from .models import Product, Substitute
+from .models import Product, Substitute, Rating
 from .manager import manager_display_products
+from .forms import RatingForm
 
 @login_required
 def display_substitutes(request):
@@ -50,8 +51,30 @@ def product_details(request, product_pk):
     Fonction permettant d'afficher les détails
     d'un produit sur une page dédiée.
     """
+    user = request.user
     product = get_object_or_404(Product, pk=product_pk)
-    return render(request, "research/product.html", {"product":product})
+    values = Rating.objects.filter(product=product).values('note')
+    users = Rating.objects.filter(product=product).values('user_id')
+
+    try:
+        exists = Rating.objects.get(product=product, user=user)
+        hasVoted = True
+    except Rating.DoesNotExist:
+        hasVoted = False
+
+
+    form = RatingForm()
+    if values:
+        final_note = 0
+        count = 0
+        for value in values:
+            final_note += value["note"]
+            count += 1
+        _rating = final_note / count
+
+        return render(request, "research/product.html", {"product":product, "rating":_rating, "hasVoted":hasVoted, "form":form})
+    else:
+        return render(request, "research/product.html", {"product":product, "hasVoted":hasVoted, "form":form})
 
 @login_required
 def save_product(request, product_pk):
@@ -85,3 +108,30 @@ def delete_product(request, substitute_pk):
         return redirect("substitutes")
     else:
         return redirect("frontpage")
+
+def rate_product(request, product_pk):
+    if request.method == "POST":
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            note = form.cleaned_data.get('rating')
+
+        product = get_object_or_404(Product, pk=product_pk)
+        user = request.user
+        rating = Rating.objects.create(product=product, user=user, note=note)
+
+        values = Rating.objects.filter(product=product).values('note')
+        users = Rating.objects.filter(product=product).values('user_id')
+        try:
+            exists = Rating.objects.get(product=product, user=user)
+            hasVoted = True
+        except Rating.DoesNotExist:
+            hasVoted = False
+
+        if values:
+            final_note = 0
+            count = 0
+            for value in values:
+                final_note += value["note"]
+                count += 1
+            _rating = final_note / count
+        return render(request, "research/product.html", {"product":product, "rating":_rating, "hasVoted":hasVoted, "form":form})

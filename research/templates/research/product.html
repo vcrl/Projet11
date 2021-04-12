@@ -3,12 +3,16 @@
 
 {% block content %}
 
-<header class="product_header masthead" style="height: initial; min-height: initial;background-image: url({{ product.img_url }});">
+<header class="product_header masthead" style="height: initial; min-height: initial;"> <!-- background-image: url({{ product.img_url }});-->
     <div class="container h-50" style="margin: 4em auto">
         <div class="row h-100 align-items-center justify-content-center text-center">
                 <div class="col-lg-10">
                   <h1 class="text-uppercase text-white font-weight-bold">{{ product.name }}</h1>
                   <hr class="divider my-4" />
+                  
+                  <h1 class="text-uppercase text-white font-weight-bold">
+                    {{ rating }} {% if rating %}⭐️{% endif %}
+                  </h1>
               </div>
         </div>
       </div>
@@ -42,10 +46,29 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-6 col-md-6 text-center">
+                  {% if user.is_authenticated %}
+                    {% if hasVoted %}
+                      <div class="mt-5">
+                        <p>Vous avez déjà noté ce produit.</p>
+                      </div>
+                    {% else %}
+                    <div class="mt-5">
+                      <form method="POST" action="{% url 'rate' product.id %}" name="notation">
+                        {% csrf_token %}
+                        {{ form.rating }}
+                        <button class="btn btn-primary">Noter</button>
+                      </form>
+                    </div>
+                    {% endif %}
+                  {% endif %}
+                  <br />
+              </div>
                 <div class="off_link">
                   <a id="save_btn" href="{{ product.url }}" target="_blank" class="btn btn-primary btn-xl" style="font-size: 20px;">Voir la fiche d'OpenFoodFacts pour + d'infos</a>
                 </div>
             </div>
+            
         </section>
   </div>
 </div>
