@@ -48,29 +48,17 @@
                 </div>
                 <div class="col-lg-6 col-md-6 text-center">
                   {% if user.is_authenticated %}
-                    {% if not users %}
+                    {% if hasVoted %}
+                      <div class="mt-5">
+                        <p>Vous avez déjà noté ce produit.</p>
+                      </div>
+                    {% else %}
                     <div class="mt-5">
                       <form method="POST" action="{% url 'rate' product.id %}" name="notation">
                         {% csrf_token %}
                         {{ form.rating }}
                         <button class="btn btn-primary">Noter</button>
                       </form>
-                    </div>
-                    {% else %}
-                    <div class="mt-5">
-                      <p>Vous avez déjà noté ce produit.</p>
-                      <!--<form method="POST" action="{% url 'rate' product.id %}" name="notation">
-                        {% csrf_token %}
-                        <h3 class="h4 mb-2">Notez ce produit :</h3>
-                        <select class="form-select">
-                          <option value="1">⭐️</option>
-                          <option value="2">⭐️⭐️</option>
-                          <option value="3">⭐️⭐️⭐️</option>
-                          <option value="4">⭐️⭐️⭐️⭐️</option>
-                          <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
-                        </select>
-                        <button class="btn btn-primary">Noter</button>
-                      </form>-->
                     </div>
                     {% endif %}
                   {% endif %}

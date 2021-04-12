@@ -54,11 +54,16 @@ def product_details(request, product_pk):
     user = request.user
     product = get_object_or_404(Product, pk=product_pk)
     values = Rating.objects.filter(product=product).values('note')
-
     users = Rating.objects.filter(product=product).values('user_id')
 
-    form = RatingForm()
+    try:
+        exists = Rating.objects.get(product=product, user=user)
+        hasVoted = True
+    except Rating.DoesNotExist:
+        hasVoted = False
 
+
+    form = RatingForm()
     if values:
         final_note = 0
         count = 0
@@ -66,9 +71,10 @@ def product_details(request, product_pk):
             final_note += value["note"]
             count += 1
         _rating = final_note / count
-        return render(request, "research/product.html", {"product":product, "rating":_rating, "users":users, "form":form})
+
+        return render(request, "research/product.html", {"product":product, "rating":_rating, "hasVoted":hasVoted, "form":form})
     else:
-        return render(request, "research/product.html", {"product":product, "users":users, "form":form})
+        return render(request, "research/product.html", {"product":product, "hasVoted":hasVoted, "form":form})
 
 @login_required
 def save_product(request, product_pk):
@@ -115,6 +121,12 @@ def rate_product(request, product_pk):
 
         values = Rating.objects.filter(product=product).values('note')
         users = Rating.objects.filter(product=product).values('user_id')
+        try:
+            exists = Rating.objects.get(product=product, user=user)
+            hasVoted = True
+        except Rating.DoesNotExist:
+            hasVoted = False
+
         if values:
             final_note = 0
             count = 0
@@ -122,6 +134,4 @@ def rate_product(request, product_pk):
                 final_note += value["note"]
                 count += 1
             _rating = final_note / count
-
-        if user.is_authenticated:
-            return render(request, "research/product.html", {"product":product, "rating":_rating, "users":users, "form":form})
+        return render(request, "research/product.html", {"product":product, "rating":_rating, "hasVoted":hasVoted, "form":form})
