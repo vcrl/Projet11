@@ -1,6 +1,6 @@
 import os
 
-KEY = os.environ.get("DJANGO_KEY")
+KEY = 'secretkey'
 DB = {
     'default': {
         'ENGINE': os.environ.get("DB_ENGINE"),
