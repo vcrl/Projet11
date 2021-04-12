@@ -65,8 +65,8 @@ def product_details(request, product_pk):
         for value in values:
             final_note += value["note"]
             count += 1
-        rating = final_note / count
-        return render(request, "research/product.html", {"product":product, "rating":rating, "users":users, "form":form})
+        _rating = final_note / count
+        return render(request, "research/product.html", {"product":product, "rating":_rating, "users":users, "form":form})
     else:
         return render(request, "research/product.html", {"product":product, "users":users, "form":form})
 
@@ -105,20 +105,22 @@ def delete_product(request, substitute_pk):
 
 def rate_product(request, product_pk):
     if request.method == "POST":
-        product = get_object_or_404(Product, pk=product_pk)
-        user = request.user
-        values = Rating.objects.filter(product=product).values('note')
-        users = Rating.objects.filter(product=product).values('user_id')
         form = RatingForm(request.POST)
         if form.is_valid():
             note = form.cleaned_data.get('rating')
+        product = get_object_or_404(Product, pk=product_pk)
+        user = request.user
+        rating = Rating.objects.create(product=product, user=user, note=note)
+
+        values = Rating.objects.filter(product=product).values('note')
+        users = Rating.objects.filter(product=product).values('user_id')
         if values:
             final_note = 0
             count = 0
             for value in values:
                 final_note += value["note"]
                 count += 1
-            rating = final_note / count
+            _rating = final_note / count
+
         if user.is_authenticated:
-            rating = Rating.objects.create(product=product, user=user, note=note)
-            return render(request, "research/product.html", {"product":product, "rating":rating, "users":users, "form":form})
+            return render(request, "research/product.html", {"product":product, "rating":_rating, "users":users, "form":form})

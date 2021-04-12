@@ -9,9 +9,10 @@
                 <div class="col-lg-10">
                   <h1 class="text-uppercase text-white font-weight-bold">{{ product.name }}</h1>
                   <hr class="divider my-4" />
-                  {% if rating %}
-                  <h1 class="text-uppercase text-white font-weight-bold">{{ rating }} ⭐️</h1>
-                  {% endif %}
+                  
+                  <h1 class="text-uppercase text-white font-weight-bold">
+                    {{ rating }} {% if rating %}⭐️{% endif %}
+                  </h1>
               </div>
         </div>
       </div>
