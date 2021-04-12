@@ -108,6 +108,7 @@ def rate_product(request, product_pk):
         form = RatingForm(request.POST)
         if form.is_valid():
             note = form.cleaned_data.get('rating')
+
         product = get_object_or_404(Product, pk=product_pk)
         user = request.user
         rating = Rating.objects.create(product=product, user=user, note=note)
