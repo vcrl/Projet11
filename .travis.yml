@@ -1,7 +1,5 @@
 language: python
 python:
-  - 3.6
-  - '3.8'
   - '3.9'
 
 install:
@@ -11,7 +9,7 @@ env: DJANGO_SETTINGS_MODULE="_Projet8.settings"
 
 branches:
   only:
-    - p10
+    - master
 
 script:
   - python manage.py test
