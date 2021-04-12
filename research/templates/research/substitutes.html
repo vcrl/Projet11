@@ -21,15 +21,15 @@
             <div class="mt-5">
                 <img src="{{ substitute.product.img_url }}" class="img-fluid" style="height:250px;width: 250px;">
                 {% if product.nutriscore == "a" %}
-                    <span class="badge-pill nutriscore text-uppercase" style="background-color: green;">{{ subtitute.product.nutriscore }}</span>
+                    <span class="badge-pill nutriscore text-uppercase" style="background-color: green;">A</span>
                 {% elif product.nutriscore == "b" %}
-                    <span class="badge-pill nutriscore text-uppercase" style="background-color: green;">{{ subtitute.product.nutriscore }}</span>
+                    <span class="badge-pill nutriscore text-uppercase" style="background-color: green;">B</span>
                 {% elif product.nutriscore == "c" %}
-                    <span class="badge-pill nutriscore text-uppercase" style="background-color: yellow;color:black">{{ subtitute.product.nutriscore }}</span>
+                    <span class="badge-pill nutriscore text-uppercase" style="background-color: yellow;color:black">C</span>
                 {% elif product.nutriscore == "d" %}
-                    <span class="badge-pill nutriscore text-uppercase" style="background-color: orange;">{{ subtitute.product.nutriscore }}</span>
+                    <span class="badge-pill nutriscore text-uppercase" style="background-color: orange;">D</span>
                 {% elif product.nutriscore == "e" %}
-                    <span class="badge-pill nutriscore text-uppercase" style="background-color: red;">{{ subtitute.product.nutriscore }}</span>
+                    <span class="badge-pill nutriscore text-uppercase" style="background-color: red;">E</span>
                 {% endif %}
               <div class="container-textproduct">
                 <h6><strong>{{ substitute.product.name }}</strong></h6>
