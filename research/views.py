@@ -51,7 +51,11 @@ def product_details(request, product_pk):
     Fonction permettant d'afficher les détails
     d'un produit sur une page dédiée.
     """
-    user = request.user
+    try:
+        user = request.user
+    except TypeError:
+        pass
+
     product = get_object_or_404(Product, pk=product_pk)
     values = Rating.objects.filter(product=product).values('note')
     users = Rating.objects.filter(product=product).values('user_id')
@@ -60,6 +64,8 @@ def product_details(request, product_pk):
         exists = Rating.objects.get(product=product, user=user)
         hasVoted = True
     except Rating.DoesNotExist:
+        hasVoted = False
+    except TypeError:
         hasVoted = False
 
 
