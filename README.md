@@ -3,7 +3,7 @@ Cet outil permet aux utilisateurs de sélectionner un produit parmi une liste g�
 L'utilisateur peut alors enregistrer les substituts qu'il trouve pertinent dans la base de donnée.
 
 ## Utilisation
-D'abord, rendez-vous sur https://fathomless-citadel-70575.herokuapp.com/
+D'abord, rendez-vous sur http://51.178.38.243/
 
 Ensuitez, inscrivez-vous grâce à l'onglet "Inscription", et vous pourrez désormais chercher vos substituts favoris !
 
